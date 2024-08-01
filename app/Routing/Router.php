@@ -2,6 +2,7 @@
 namespace App\Routing;
 
 include "App\Controllers\Controller.php";
+include "App\Controllers\ViewController.php";
 
 class Router {
     public $routes = [];
@@ -30,7 +31,7 @@ class Router {
     {
         $uri = $_SERVER['REQUEST_URI'];
         $method = $_SERVER['REQUEST_METHOD'];
-        $base_url = "/form--submit-with-frontend-validation";
+        $base_url = "/form-submit-with-frontend-validation";
 
         foreach ($this->routes as $route){
             if ($base_url . $route['uri'] == $uri && $route['method'] == $method){

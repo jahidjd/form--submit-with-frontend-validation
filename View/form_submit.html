@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submission Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Submission Form</h2>
+        <a href="/form-submit-with-frontend-validation/report" class="btn btn-info">Data List</a>
+        <form id="submissionForm">
+            <div class="col-md-12 row">
+                <div class="form-group col-md-4">
+                    <label for="amount">Amount:</label>
+                    <input type="number" class="form-control" id="amount" name="amount" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="buyer">Buyer:</label>
+                    <input type="text" class="form-control" id="buyer" name="buyer" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="receipt_id">Receipt ID:</label>
+                    <input type="text" class="form-control" id="receipt_id" name="receipt_id" required>
+                </div>
+            </div>
+            <div class="col-md-12 row">
+                <div class="form-group col-md-6">
+                    <label for="items">Items:</label>
+                    <input type="text" class="form-control" id="items" name="items" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="buyer_email">Buyer Email:</label>
+                    <input type="email" class="form-control" id="buyer_email" name="buyer_email" required>
+                </div>
+            </div>
+            <div class="col-md-12 row">
+                <div class="form-group col-md-12">
+                    <label for="note">Note:</label>
+                    <textarea class="form-control" id="note" name="note" rows="3" required></textarea>
+                </div>
+            </div>
+         <div class="col-md-12 row">
+            <div class="form-group col-md-4">
+                <label for="city">City:</label>
+                <input type="text" class="form-control" id="city" name="city" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="phone">Phone:</label>
+                <input type="text" class="form-control" id="phone" name="phone" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="entry_by">Entry By:</label>
+                <input type="number" class="form-control" id="entry_by" name="entry_by" required>
+            </div>
+         </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#phone").keyup(function() {
+            var val = $(this).val();
+            if (!val.startsWith("880")) {
+                $(this).val("880" + val);
+            }
+        });
+
+        $("#submissionForm").submit(function(e) {
+            e.preventDefault();
+
+            var note = $("#note").val();
+            if (note.split(" ").length > 30) {
+                alert("Note cannot be more than 30 words.");
+                return false;
+            }
+
+            $.ajax({
+                url: "/form-submit-with-frontend-validation/store",
+                type: "POST",
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response.status == 'true') {
+                        alert("success");
+                        $("#submissionForm")[0].reset();
+                    }else if (response.status == 'cookie'){
+                        alert("You can only submit once every 24 hours");
+                    }else{
+                        alert('something went wrong')
+                    }
+
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert("Error: " + textStatus + " - " + errorThrown);
+                }
+            });
+        });
+    });
+</script>
+</html>

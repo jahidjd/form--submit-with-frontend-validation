@@ -6,7 +6,7 @@ if (str_contains($_SERVER['REQUEST_URI'], '/form-submit-with-frontend-validation
     $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
     switch($uri_segment){
         case '':
-              $router->get('/',App\Controllers\Controller::class,'index');
+              $router->get('/',App\Controllers\ViewController::class,'index');
             break;
         case 'report':
             $router->get('/report',App\Controllers\Controller::class,'report');
