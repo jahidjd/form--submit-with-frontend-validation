@@ -11,7 +11,7 @@ Simple PHP form submission script with frontend validation
 
 -Requirements
 
-    -PHP 8.2
+    -PHP 8.1
 
 -Setup
     -clone the project or unzip the folder on your root htdocs
