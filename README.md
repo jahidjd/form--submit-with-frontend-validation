@@ -5,8 +5,8 @@ Simple PHP form submission script with frontend validation
 
 -Features:
 
--form submition with ajax:
--showing report based on start and end date or user id which is entry_by id
+    -form submition with ajax:
+    -showing report based on start and end date or user id which is entry_by id
 
 
 -Requirements
