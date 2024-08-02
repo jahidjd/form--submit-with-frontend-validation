@@ -7,7 +7,7 @@
 <body>
     <div class="container mt-5">
         <h2>Submission Form</h2>
-        <a href="/form-submit-with-frontend-validation/report" class="btn btn-info">Data List</a>
+        <a href="/form-submit-with-frontend-validation/report" class="btn btn-info">List</a>
         <form id="submissionForm">
             <div class="col-md-12 row">
                 <div class="form-group col-md-4">
@@ -73,6 +73,11 @@
             var note = $("#note").val();
             if (note.split(" ").length > 30) {
                 alert("Note cannot be more than 30 words.");
+                return false;
+            }
+            var note = $("#buyer").val();
+            if (note.split(" ").length > 20) {
+                alert("Note cannot be more than 20 words.");
                 return false;
             }
 

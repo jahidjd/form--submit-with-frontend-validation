@@ -14,6 +14,9 @@ if (str_contains($_SERVER['REQUEST_URI'], '/form-submit-with-frontend-validation
         case 'store':
             $router->post('/store',App\Controllers\Controller::class,'store');
             break;
+        case 'get-report':
+            $router->post('/get-report',App\Controllers\Controller::class,'getReport');
+            break;
     }
 }
 

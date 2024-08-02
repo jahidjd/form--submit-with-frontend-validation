@@ -4,6 +4,8 @@ namespace App\Models;
 require_once __DIR__ . '/../Config/Database.php';
 
 use App\Config\Database;
+use PDO;
+use PDOException;
 
 class Model {
     private $db;
@@ -20,7 +22,36 @@ class Model {
             
             return "Data inserted successfully!";
         } catch (PDOException $e) {
-            return "Error: " . $e->getMessage();
+            echo "Error: " . $e->getMessage();
         }
     }
+
+    public function getSubmissionsRepost(string $startDate = null, string $endDate = null, $userId = null) {
+        try {
+            $query = "SELECT * FROM submissions WHERE 1=1";
+    
+            if ($startDate != null) {
+                $query .= " AND entry_at >= :startDate";
+            }
+            if ($endDate != null) {
+                $query .= " AND entry_at <= :endDate";
+            }
+            if ($userId != null) {
+                $query .= " AND entry_by =" . $userId;
+            }
+    
+            $stmt = $this->db->prepare($query);
+            if ($startDate != null) {
+                $stmt->bindParam(':startDate', $startDate, PDO::PARAM_STR);
+            }
+            if ($endDate != null) {
+                $stmt->bindParam(':endDate', $endDate, PDO::PARAM_STR);
+            }
+            $stmt->execute();
+        
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) { 
+            echo "Error: " . $e->getMessage();
+        }
+    }    
 }

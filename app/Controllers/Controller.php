@@ -70,7 +70,21 @@ class Controller {
 
     public function report()
     {
-        echo file_get_contents('View/report.php');
+         include 'View\report.php';
+    }
+
+    public function getReport()
+    {
+        $startDate = $_POST['start_date'] ?? null;
+        $endDate = $_POST['end_date'] ?? null;
+        $userId = $_POST['user_id'] ?? null;
+
+        if ($startDate || $endDate || $userId) {
+            $submissions = $this->model->getSubmissionsRepost($startDate, $endDate, $userId);
+        } else {
+            $submissions = [];
+        }
+        include 'View\report.php';
     }
 
     function preventMultipleSubmissions() {
