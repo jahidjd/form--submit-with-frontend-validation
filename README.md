@@ -18,7 +18,7 @@ Simple PHP form submission script with frontend validation
     -clone the project or unzip the folder on your root htdocs
     -import the database from the sql folder
     -or create a database and past this code here to make the table. and after that make sure to change the database name from #app\Config\config.php this file
-    -[localhost/Form_submition_with_ajax](http://localhost/form-submit-with-frontend-validation/) this is the main route for the form 
+    -(http://localhost/form-submit-with-frontend-validation/) this is the main route for the form 
     -after that you can click on the #list to see data list by filtering the data by start and end date or only user id which will be the enrty_by id
 
 
